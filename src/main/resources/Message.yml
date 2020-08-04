@@ -1,3 +1,8 @@
 Help:
-  - ""
-Backstage: ""
+  - "/RandomEntry - 主命令/帮助命令"
+  - "   Open - 打开GUI界面"
+  - "   NoView - 无界面鉴定"
+  - "     V - 金币鉴定"
+  - "     P - 点券鉴定"
+  - "   reload - 重载指令"
+Backstage: "&4后台不能打开GUI界面哦！"

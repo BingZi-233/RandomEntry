@@ -3,7 +3,6 @@ package vip.bingzi.randomentry;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.yaml.snakeyaml.Yaml;
 import vip.bingzi.randomentry.util.Command;
 
 import java.io.File;
@@ -11,27 +10,43 @@ import java.io.File;
 public final class RandomEntry extends JavaPlugin {
     public static YamlConfiguration Entry;
     public static YamlConfiguration Message;
+    public static RandomEntry PluginMain;
+    public static boolean Debug;
+
+    public static RandomEntry getPluginMain() {
+        return PluginMain;
+    }
+
     @Override
     public void onLoad() {
-        File fileConfig = new File(getDataFolder(),"config.yml");
-        File fileEntry = new File(getDataFolder(),"Entry.yml");
-        File fileMessage = new File(getDataFolder(),"Message.yml");
-        onFileExamine(fileConfig,true,"配置文件");
-        onFileExamine(fileEntry,false,"随机文件");
-        onFileExamine(fileMessage,false,"语言文件");
+        long startTime = System.currentTimeMillis();
+        File fileConfig = new File(getDataFolder(), "config.yml");
+        File fileEntry = new File(getDataFolder(), "Entry.yml");
+        File fileMessage = new File(getDataFolder(), "Message.yml");
+        onFileExamine(fileConfig, true, "配置文件");
+        onFileExamine(fileEntry, false, "随机文件");
+        onFileExamine(fileMessage, false, "语言文件");
         Entry = YamlConfiguration.loadConfiguration(fileEntry);
         Message = YamlConfiguration.loadConfiguration(fileMessage);
+        Debug = getConfig().getBoolean("Debug");
+        long endTime = System.currentTimeMillis();
+        if (Debug) getLogger().info("程序执行加载耗时 "+(endTime-startTime)+" 毫秒");
     }
 
     @Override
     public void onEnable() {
+        long startTime = System.currentTimeMillis();
+        PluginMain = this;
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new Command());
+        long endTime = System.currentTimeMillis();
+        if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
     }
 
     @Override
     public void onDisable() {
 
     }
+
     private void onFileExamine(File file, Boolean isConfig, String fileName) {
         // 检查文件是否存在
         if (file.exists()) {

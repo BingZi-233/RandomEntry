@@ -1,5 +1,9 @@
+ViewTitle: "界面标题"
 # 配置文件版本，如果不熟悉这个是干啥的请不要修改。
 Version: ${project.version}
 # 自动更新配置文件
 # [true - 开启 / false - 关闭]
 AutoUpDate: true
+# 调试开关，打开后可以看到详细的执行时间以及更多的执行日志
+# [true - 开启 / false - 关闭]
+Debug: false
