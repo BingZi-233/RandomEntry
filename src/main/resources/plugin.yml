@@ -1,0 +1,19 @@
+name: RandomEntry
+version: ${project.version}
+main: vip.bingzi.randomentry.RandomEntry
+api-version: "1.16"
+softdepend: [PlaceholderAPI, BZCore]
+authors: [BingZi]
+description: "冰系下的随机词条，类似鉴定的功能。"
+commands:
+  bzjd:
+    aliases:
+      - jd
+      - RandomEntry
+      - re
+    permission: RandomEntry.use
+permissions:
+  RandomEntry.use:
+    default: true
+  RandomEntry.op:
+    default: op
