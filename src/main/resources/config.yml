@@ -1,4 +1,12 @@
 ViewTitle: "界面标题"
+Item:
+  Name: "&7&l梦泽界限"
+    Mats: WHITE_STAINED_GLASS_PANE
+  Lore:
+    - ""
+    - "&7&l无法逾越的底线"
+    - "&7&l&m================="
+    - "&8&l&o维护团队：相思梦泽 - 冰爷"
 # 配置文件版本，如果不熟悉这个是干啥的请不要修改。
 Version: ${project.version}
 # 自动更新配置文件

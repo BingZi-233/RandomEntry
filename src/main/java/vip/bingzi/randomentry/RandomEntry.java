@@ -3,7 +3,7 @@ package vip.bingzi.randomentry;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import vip.bingzi.randomentry.util.Command;
+import vip.bingzi.randomentry.util.RandomEntryCommand;
 
 import java.io.File;
 
@@ -37,7 +37,7 @@ public final class RandomEntry extends JavaPlugin {
     public void onEnable() {
         long startTime = System.currentTimeMillis();
         PluginMain = this;
-        Bukkit.getPluginCommand("RandomEntry").setExecutor(new Command());
+        Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
         long endTime = System.currentTimeMillis();
         if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
     }
