@@ -2,6 +2,7 @@ package vip.bingzi.randomentry.util;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -61,13 +62,13 @@ public class RandomEntryCommand implements CommandExecutor {
     }
     public static void ViewGUi(Player p){
         Inventory inventory = Bukkit.createInventory(p,45,RandomEntry.getPluginMain().getConfig().getString("ViewTitle"));
-        ItemStack itemStack = new ItemStack(RandomEntry.getPluginMain().getConfig().getItemStack("Item.Mats"));
+        ItemStack itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString("Item.Mats")));
         ItemMeta meta = itemStack.getItemMeta();
         meta.setLore(RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"));
         meta.setDisplayName(RandomEntry.getPluginMain().getConfig().getString("Item.Name"));
         itemStack.setItemMeta(meta);
         for (int i = 0; i < 45; i++){
-            if (i<=8||i>=36){
+            if (i<=9||i==17||i==18||i==26||i==27||i==35||i>=36){
                 inventory.setItem(i,itemStack);
             }
         }
