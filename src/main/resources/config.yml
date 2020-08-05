@@ -1,7 +1,7 @@
 ViewTitle: "界面标题"
 Item:
   Name: "&7&l梦泽界限"
-    Mats: WHITE_STAINED_GLASS_PANE
+  Mats: WHITE_STAINED_GLASS_PANE
   Lore:
     - ""
     - "&7&l无法逾越的底线"
