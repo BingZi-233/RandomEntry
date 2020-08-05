@@ -71,9 +71,8 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
-            <id>dakani</id>
-            <name>Dakani Nexus Repo</name>
-            <url>http://repo.dakanilabs.com/content/repositories/public</url>
+            <id>handy-minecraft</id>
+            <url>http://maven.ljxmc.top/repository/handy-minecraft/</url>
         </repository>
     </repositories>
 

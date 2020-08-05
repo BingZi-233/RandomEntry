@@ -41,5 +41,10 @@
       <option name="name" value="Dakani Nexus Repo" />
       <option name="url" value="http://repo.dakanilabs.com/content/repositories/public" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="handy-minecraft" />
+      <option name="name" value="handy-minecraft" />
+      <option name="url" value="http://maven.ljxmc.top/repository/handy-minecraft/" />
+    </remote-repository>
   </component>
 </project>
