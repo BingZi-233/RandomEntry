@@ -26,7 +26,8 @@ public class RandomEntryInv implements Listener {
     @EventHandler
     public void onPlayerOpenGui(InventoryClickEvent event){
         // 检查是不是鉴定界面
-        if (event.getView().getTitle().equalsIgnoreCase(RandomEntry.getPluginMain().getConfig().getString("ViewTitle"))){
+        // 这里使用了OpenInfo全局参数进行了简化判断的过程
+        if (OpenInfo){
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("玩家"+event.getView().getPlayer().getName()+"点击了鉴定界面");
             event.setCancelled(true);
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("已经取消点击");

@@ -9,7 +9,8 @@ import vip.bingzi.randomentry.util.RandomEntryInv;
 import java.io.File;
 
 public final class RandomEntry extends JavaPlugin {
-    public static YamlConfiguration Entry;
+    public static YamlConfiguration VaultEntry;
+    public static YamlConfiguration PointsEntry;
     public static YamlConfiguration Message;
     public static RandomEntry PluginMain;
     public static boolean Debug;
@@ -22,12 +23,15 @@ public final class RandomEntry extends JavaPlugin {
     public void onLoad() {
         long startTime = System.currentTimeMillis();
         File fileConfig = new File(getDataFolder(), "config.yml");
-        File fileEntry = new File(getDataFolder(), "Entry.yml");
+        File fileVaultEntry = new File(getDataFolder(), "VaultEntry.yml");
+        File filePointsEntry = new File(getDataFolder(), "PointsEntry.yml");
         File fileMessage = new File(getDataFolder(), "Message.yml");
         onFileExamine(fileConfig, true, "配置文件");
-        onFileExamine(fileEntry, false, "随机文件");
+        onFileExamine(fileVaultEntry, false, "金币随机文件");
+        onFileExamine(filePointsEntry, false, "点券随机文件");
         onFileExamine(fileMessage, false, "语言文件");
-        Entry = YamlConfiguration.loadConfiguration(fileEntry);
+        VaultEntry = YamlConfiguration.loadConfiguration(fileVaultEntry);
+        PointsEntry = YamlConfiguration.loadConfiguration(filePointsEntry);
         Message = YamlConfiguration.loadConfiguration(fileMessage);
         Debug = getConfig().getBoolean("Debug");
         long endTime = System.currentTimeMillis();
