@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import vip.bingzi.randomentry.util.RandomEntryCommand;
 import vip.bingzi.randomentry.util.RandomEntryInv;
+import vip.bingzi.randomentry.util.VaultEdit;
 
 import java.io.File;
 
@@ -44,6 +45,8 @@ public final class RandomEntry extends JavaPlugin {
         PluginMain = this;
         Bukkit.getPluginManager().registerEvents(new RandomEntryInv(),this);
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
+        // 初始化金币功能组件
+        VaultEdit.setupEconomy();
         long endTime = System.currentTimeMillis();
         if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
     }
