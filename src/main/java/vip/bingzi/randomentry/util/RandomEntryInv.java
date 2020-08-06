@@ -31,6 +31,14 @@ public class RandomEntryInv implements Listener {
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("玩家"+event.getView().getPlayer().getName()+"点击了鉴定界面");
             event.setCancelled(true);
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("已经取消点击");
+            if (event.getCurrentItem() == null) return;
+            if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name"))){
+                if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点击了金币按钮");
+                return;
+            }
+            if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name"))){
+                if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点击了点券按钮");
+            }
         }
     }
 }
