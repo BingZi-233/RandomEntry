@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class VaultEdit {
     private static Economy econ;
     public boolean onVaultEdit(Player player ,int Value){
-        EconomyResponse response = econ.depositPlayer(player,-1);
+        EconomyResponse response = econ.depositPlayer(player, -Value);
         return response.transactionSuccess();
     }
     public static Economy getEconomy() {
