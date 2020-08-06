@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import vip.bingzi.randomentry.RandomEntry;
 
 import java.io.File;
+import java.util.List;
 
 public class RandomEntryCommand implements CommandExecutor {
     private static Economy econ = null;
@@ -29,11 +30,6 @@ public class RandomEntryCommand implements CommandExecutor {
                 if (sender instanceof Player){
                     Player player = (Player) sender;
                     ViewGUi(player);
-                    // 扣除操作
-//                    EconomyResponse response = econ.depositPlayer(player,-1);
-//                    if (response.transactionSuccess()){
-//
-//                    }
 
                 }else{
                     sender.sendMessage(RandomEntry.Message.getString("Backstage").replace("&","§"));
@@ -72,7 +68,26 @@ public class RandomEntryCommand implements CommandExecutor {
                 inventory.setItem(i,itemStack);
             }
         }
+        ItemStack VaultButton = onItemStack(
+                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Mats"),
+                RandomEntry.getPluginMain().getConfig().getStringList("VaultButton.Lore"),
+                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name")
+        );
+        ItemStack PointsButton = onItemStack(
+                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
+                RandomEntry.getPluginMain().getConfig().getStringList("PointsButton.Lore"),
+                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name")
+        );
+        inventory.setItem(20,VaultButton);
+        inventory.setItem(24,PointsButton);
         p.openInventory(inventory);
     }
-
+    private static ItemStack onItemStack(String material, List<String> Lore, String DisplayName){
+        ItemStack itemStack = new ItemStack(Material.valueOf(material));
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setLore(Lore);
+        itemMeta.setDisplayName(DisplayName);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
 }

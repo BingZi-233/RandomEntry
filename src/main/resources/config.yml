@@ -1,4 +1,4 @@
-ViewTitle: "&l[相思梦泽] - 鉴定"
+ViewTitle: "§l[相思梦泽] - 鉴定"
 Item:
   Name: "§7§l梦泽界限"
   Mats: WHITE_STAINED_GLASS_PANE
@@ -8,22 +8,22 @@ Item:
     - "§7§l§m================="
     - "§8§l§o维护团队：相思梦泽 - 冰爷"
 VaultButton:
-  Name: "&3&l[ 普通 ] 鉴定"
-  Mats:
+  Name: "§3§l[ 普通 ] 鉴定"
+  Mats: WHITE_STAINED_GLASS_PANE
   Lore:
     - ""
-    - "&7&l使用金币进行一次鉴定"
-    - "&7&l可以解锁一个未鉴定的槽位"
+    - "§7§l使用金币进行一次鉴定"
+    - "§7§l可以解锁一个未鉴定的槽位"
     - "§7§l§m================="
     - "§8§l§o维护团队：相思梦泽 - 冰爷"
   Consume: 300
 PointsButton:
-  Name: "&3&l[ 高级 ] 鉴定"
-  Mats:
+  Name: "§3§l[ 高级 ] 鉴定"
+  Mats: WHITE_STAINED_GLASS_PANE
   Lore:
     - ""
-    - "&7&l使用点券进行一次鉴定"
-    - "&7&l可以解锁一个未鉴定的槽位"
+    - "§7§l使用点券进行一次鉴定"
+    - "§7§l可以解锁一个未鉴定的槽位"
     - "§7§l§m================="
     - "§8§l§o维护团队：相思梦泽 - 冰爷"
   Consume: 50
