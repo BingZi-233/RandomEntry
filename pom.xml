@@ -55,10 +55,6 @@
 
     <repositories>
         <repository>
-            <id>minecraft</id>
-            <url>http://maven.ljxmc.top/repository/minecraft/</url>
-        </repository>
-        <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>

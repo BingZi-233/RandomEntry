@@ -13,21 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomEntryInv implements Listener {
-    private static int[] RandomValue(String[] Min, String[] Max) {
-        Random random = new Random();
-        int[] Value = new int[2];
-        Value[0] = random.nextInt(Integer.parseInt(Min[0])) % (Integer.parseInt(Min[1]) - Integer.parseInt(Min[0]) + 1) + Integer.parseInt(Min[0]);
-        Value[1] = random.nextInt(Integer.parseInt(Max[0])) % (Integer.parseInt(Max[1]) - Integer.parseInt(Max[0]) + 1) + Integer.parseInt(Max[0]);
-        return Value;
-    }
-
-    private static int[] RandomValue(String[] Min) {
-        Random random = new Random();
-        int[] Value = new int[1];
-        Value[0] = random.nextInt(Integer.parseInt(Min[0])) % (Integer.parseInt(Min[1]) - Integer.parseInt(Min[0]) + 1) + Integer.parseInt(Min[0]);
-        return Value;
-    }
-
     @EventHandler
     public void onPlayerOpenGui(InventoryClickEvent event) {
         // 检查是不是鉴定界面
@@ -47,7 +32,6 @@ public class RandomEntryInv implements Listener {
                     player.updateInventory();
                     // 获取玩家主手物品的lore
                     ItemStack itemStack = player.getInventory().getItemInMainHand();
-//                    List<String> listLore = player.getInventory().getItemInMainHand().getItemMeta().getLore();
                     ItemMeta itemMeta = itemStack.getItemMeta();
                     List<String> listLore = itemMeta.getLore();
                     int a = listLore.indexOf(RandomEntry.VaultEntry.getString("AttackAffix.IdentifyLore"));
@@ -59,7 +43,7 @@ public class RandomEntryInv implements Listener {
                     }
 
                     Random random = new Random();
-                    List<String> s = RandomEntry.getPluginMain().VaultEntry.getStringList("AttackAffix.RandomList");
+                    List<String> s = RandomEntry.VaultEntry.getStringList("AttackAffix.RandomList");
                     if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到的列表为：" + s);
                     int i = random.nextInt(s.size());
                     String s1 = s.get(i);
@@ -93,6 +77,21 @@ public class RandomEntryInv implements Listener {
                 if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点击了点券按钮");
             }
         }
+    }
+
+    private static int[] RandomValue(String[] Min, String[] Max) {
+        Random random = new Random();
+        int[] Value = new int[2];
+        Value[0] = random.nextInt(Integer.parseInt(Min[0])) % (Integer.parseInt(Min[1]) - Integer.parseInt(Min[0]) + 1) + Integer.parseInt(Min[0]);
+        Value[1] = random.nextInt(Integer.parseInt(Max[0])) % (Integer.parseInt(Max[1]) - Integer.parseInt(Max[0]) + 1) + Integer.parseInt(Max[0]);
+        return Value;
+    }
+
+    private static int[] RandomValue(String[] Min) {
+        Random random = new Random();
+        int[] Value = new int[1];
+        Value[0] = random.nextInt(Integer.parseInt(Min[0])) % (Integer.parseInt(Min[1]) - Integer.parseInt(Min[0]) + 1) + Integer.parseInt(Min[0]);
+        return Value;
     }
 
 }

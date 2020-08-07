@@ -20,6 +20,9 @@ public class RandomEntryCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         long startTime = System.currentTimeMillis();
+        if (args.length == 0 ){
+
+        }
         switch (args[0]){
             case "open":{
                 if (sender instanceof Player){
