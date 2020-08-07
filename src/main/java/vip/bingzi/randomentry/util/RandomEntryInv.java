@@ -34,8 +34,9 @@ public class RandomEntryInv implements Listener {
         // 这里使用了OpenInfo全局参数进行了简化判断的过程
         if (RandomEntry.getPluginMain().getConfig().getString("ViewTitle").equalsIgnoreCase(event.getView().getTitle())) {
             Player player = (Player) event.getView().getPlayer();
-            if (RandomEntry.Debug)
+            if (RandomEntry.Debug) {
                 RandomEntry.getPluginMain().getLogger().info("玩家" + event.getView().getPlayer().getName() + "点击了鉴定界面");
+            }
             event.setCancelled(true);
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("已经取消点击");
             if (event.getCurrentItem() == null) return;
