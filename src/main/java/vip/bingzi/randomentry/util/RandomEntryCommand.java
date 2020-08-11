@@ -34,6 +34,9 @@ public class RandomEntryCommand implements CommandExecutor {
                 }
                 break;
             }
+            case "test":{
+                LoreProcess.onStringProcess((Player)sender,false);
+            }
             case "reload":{
                 sender.sendMessage("§a§l[ RandomEntry ] >> 重载完成");
                 RandomEntry.Message = YamlConfiguration.loadConfiguration(new File(RandomEntry.getPluginMain().getDataFolder(),"Message.yml"));

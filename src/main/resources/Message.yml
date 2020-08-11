@@ -7,3 +7,4 @@ Help:
   - "   reload - 重载指令"
 Backstage: "&4后台不能打开GUI界面哦！"
 Failure: "对不起，您的金币不足以进行一次鉴定操作"
+NoKey: "未在物品上寻找到可以鉴定的词条"
