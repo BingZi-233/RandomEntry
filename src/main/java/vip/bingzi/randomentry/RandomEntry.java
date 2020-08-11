@@ -1,7 +1,9 @@
 package vip.bingzi.randomentry;
 
+import org.black_ixx.playerpoints.PlayerPoints;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import vip.bingzi.randomentry.util.RandomEntryCommand;
 import vip.bingzi.randomentry.util.RandomEntryInv;
@@ -14,6 +16,7 @@ public final class RandomEntry extends JavaPlugin {
     public static YamlConfiguration PointsEntry;
     public static YamlConfiguration Message;
     public static RandomEntry PluginMain;
+    private PlayerPoints playerPoints;
     public static boolean Debug;
 
     public static RandomEntry getPluginMain() {
@@ -47,6 +50,13 @@ public final class RandomEntry extends JavaPlugin {
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
         // 初始化金币功能组件
         VaultEdit.setupEconomy();
+        // 检测点券插件的
+        if (hookPlayerPoints()){
+            getLogger().info("成功载入点券系统");
+        }else{
+            getLogger().info("点券系统载入失败");
+        }
+
         long endTime = System.currentTimeMillis();
         if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
     }
@@ -54,6 +64,14 @@ public final class RandomEntry extends JavaPlugin {
     @Override
     public void onDisable() {
 
+    }
+    private boolean hookPlayerPoints() {
+        final Plugin plugin = this.getServer().getPluginManager().getPlugin("PlayerPoints");
+        playerPoints = PlayerPoints.class.cast(plugin);
+        return playerPoints != null;
+    }
+    public PlayerPoints getPlayerPoints() {
+        return playerPoints;
     }
 
     private void onFileExamine(File file, Boolean isConfig, String fileName) {

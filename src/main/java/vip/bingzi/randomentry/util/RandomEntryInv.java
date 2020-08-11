@@ -43,6 +43,20 @@ public class RandomEntryInv implements Listener {
             }
             if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name"))) {
                 if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点击了点券按钮");
+                // 先进行物品是否有需求的Lore检查
+                if (!LoreProcess.getKeyInfo(player,false)){
+                    if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("未检测到指定Lore，进行终止操作。");
+                    return;
+                }
+                // 进行了金币扣除操作
+                if (PointsEdit.onPointsEdit(player, RandomEntry.getPluginMain().getConfig().getInt("VaultButton.Consume"))) {
+                    if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券扣除成功，正在进行后续操作");
+                    LoreProcess.onStringProcess(player,false);
+                } else {
+                    if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券扣除失败，进行玩家提示");
+                    player.sendRawMessage(RandomEntry.Message.getString("Failure"));
+                }
+                return;
             }
         }
     }
