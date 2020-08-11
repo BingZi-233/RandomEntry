@@ -2,6 +2,7 @@ name: RandomEntry
 version: ${project.version}
 main: vip.bingzi.randomentry.RandomEntry
 api-version: "1.13"
+depend: [Vault, PlayerPoints]
 softdepend: [PlaceholderAPI, BZCore, Vault, PlayerPoints]
 authors: [BingZi]
 description: "冰系下的随机词条，类似鉴定的功能。"
