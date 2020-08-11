@@ -1,6 +1,7 @@
 package vip.bingzi.randomentry;
 
 import org.black_ixx.playerpoints.PlayerPoints;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -56,8 +57,10 @@ public final class RandomEntry extends JavaPlugin {
         }else{
             getLogger().info("点券系统载入失败");
         }
-
+        // 统计使用量
+        Metrics metrics = new Metrics(this,8500);
         long endTime = System.currentTimeMillis();
+
         if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
     }
 
