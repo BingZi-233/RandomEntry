@@ -50,7 +50,9 @@ public final class RandomEntry extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new RandomEntryInv(),this);
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
         //加载gui
-        RandomEntryCommand.loadGUI();
+        // 冰子：这部分进行了异步操作，以防止卡顿
+        Thread thread = new Thread(RandomEntryCommand::loadGUI);
+        thread.start();
         // 初始化金币功能组件
         VaultEdit.setupEconomy();
         // 检测点券插件的
