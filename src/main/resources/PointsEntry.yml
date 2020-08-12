@@ -1,7 +1,4 @@
 AttackAffix:
-  IdentifyLore: "§8> §c攻击词缀(待鉴定)"
+  IdentifyLore: "§8> §7§l攻击词缀(待鉴定)"
   RandomList:
-    PhysicalAttack:
-      Lore: "§8> §c物理伤害：%s - %s"
-      Min: 1
-      Max: 20
+    - "§8> §c物理伤害：!100~500! - !501~600!"

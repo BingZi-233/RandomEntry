@@ -48,6 +48,9 @@ public class RandomEntryCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         long startTime = System.currentTimeMillis();
+        if (args.length == 0 ){
+
+        }
         switch (args[0]){
             case "open":{
                 if (sender instanceof Player){
@@ -58,6 +61,9 @@ public class RandomEntryCommand implements CommandExecutor {
                     sender.sendMessage(RandomEntry.Message.getString("Backstage").replace("&","§"));
                 }
                 break;
+            }
+            case "test":{
+                LoreProcess.onStringProcess((Player)sender,false);
             }
             case "reload":{
                 sender.sendMessage("§a§l[ RandomEntry ] >> 重载完成");
