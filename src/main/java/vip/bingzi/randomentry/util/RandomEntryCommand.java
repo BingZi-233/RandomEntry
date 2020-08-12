@@ -17,6 +17,34 @@ import java.util.List;
 
 public class RandomEntryCommand implements CommandExecutor {
     private static Economy econ = null;
+    private static Inventory ViewGUi;
+    //开服时加载gui不必每次都加载
+    public static void loadGUI(){
+        Inventory inventory = Bukkit.createInventory(null,45,RandomEntry.getPluginMain().getConfig().getString("ViewTitle"));
+        ItemStack itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString("Item.Mats")));
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.setLore(RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"));
+        meta.setDisplayName(RandomEntry.getPluginMain().getConfig().getString("Item.Name"));
+        itemStack.setItemMeta(meta);
+        for (int i = 0; i < 45; i++){
+            if (i<=9||i==17||i==18||i==26||i==27||i==35||i>=36){
+                inventory.setItem(i,itemStack);
+            }
+        }
+        ItemStack VaultButton = onItemStack(
+                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Mats"),
+                RandomEntry.getPluginMain().getConfig().getStringList("VaultButton.Lore"),
+                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name")
+        );
+        ItemStack PointsButton = onItemStack(
+                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
+                RandomEntry.getPluginMain().getConfig().getStringList("PointsButton.Lore"),
+                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name")
+        );
+        inventory.setItem(20,VaultButton);
+        inventory.setItem(24,PointsButton);
+        ViewGUi= inventory;
+    }
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         long startTime = System.currentTimeMillis();
@@ -59,30 +87,7 @@ public class RandomEntryCommand implements CommandExecutor {
         return econ;
     }
     public static void ViewGUi(Player p){
-        Inventory inventory = Bukkit.createInventory(p,45,RandomEntry.getPluginMain().getConfig().getString("ViewTitle"));
-        ItemStack itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString("Item.Mats")));
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.setLore(RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"));
-        meta.setDisplayName(RandomEntry.getPluginMain().getConfig().getString("Item.Name"));
-        itemStack.setItemMeta(meta);
-        for (int i = 0; i < 45; i++){
-            if (i<=9||i==17||i==18||i==26||i==27||i==35||i>=36){
-                inventory.setItem(i,itemStack);
-            }
-        }
-        ItemStack VaultButton = onItemStack(
-                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Mats"),
-                RandomEntry.getPluginMain().getConfig().getStringList("VaultButton.Lore"),
-                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name")
-        );
-        ItemStack PointsButton = onItemStack(
-                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
-                RandomEntry.getPluginMain().getConfig().getStringList("PointsButton.Lore"),
-                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name")
-        );
-        inventory.setItem(20,VaultButton);
-        inventory.setItem(24,PointsButton);
-        p.openInventory(inventory);
+        p.openInventory(ViewGUi);
     }
     private static ItemStack onItemStack(String material, List<String> Lore, String DisplayName){
         ItemStack itemStack = new ItemStack(Material.valueOf(material));
