@@ -48,8 +48,11 @@ public class RandomEntryCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         long startTime = System.currentTimeMillis();
-        if (args.length == 0 ){
-
+        if (args.length == 0){
+            for (String s : RandomEntry.Message.getStringList("Help")) {
+                sender.sendMessage(s.replace("&", "§"));
+            }
+            return true;
         }
         switch (args[0]){
             case "open":{

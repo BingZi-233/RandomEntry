@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import vip.bingzi.randomentry.util.RandomEntryCommand;
-import vip.bingzi.randomentry.util.RandomEntryInv;
+import vip.bingzi.randomentry.util.RandomEntryEvent;
 import vip.bingzi.randomentry.util.VaultEdit;
 
 import java.io.File;
@@ -47,7 +47,7 @@ public final class RandomEntry extends JavaPlugin {
     public void onEnable() {
         long startTime = System.currentTimeMillis();
         PluginMain = this;
-        Bukkit.getPluginManager().registerEvents(new RandomEntryInv(),this);
+        Bukkit.getPluginManager().registerEvents(new RandomEntryEvent(),this);
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
         //加载gui
         // 冰子：这部分进行了异步操作，以防止卡顿

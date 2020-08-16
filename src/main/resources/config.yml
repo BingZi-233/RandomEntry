@@ -27,6 +27,9 @@ PointsButton:
     - "§7§l§m================="
     - "§8§l§o维护团队：相思梦泽 - 冰爷"
   Consume: 50
+ItemLore:
+  Points: "一条测试的点券鉴定Lore"
+  Vault: "一条测试的金币鉴定Lore"
 # 配置文件版本，如果不熟悉这个是干啥的请不要修改。
 Version: ${project.version}
 # 自动更新配置文件
