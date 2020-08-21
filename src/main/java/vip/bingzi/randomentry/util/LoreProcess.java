@@ -34,7 +34,11 @@ public class LoreProcess {
         if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到的Keys："+keys); // 调试输出
         int a = -1;
         for (String s : keys){
-            a = lore.indexOf(RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
+            if (VoP){
+                a = lore.indexOf(RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
+            }else{
+                a = lore.indexOf(RandomEntry.PointsEntry.getString(s+".IdentifyLore"));
+            }
             if (a != -1){
                 VaultEntryKey = s;
                 if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到了Key:"+VaultEntryKey+"位置信息："+a);
@@ -117,10 +121,15 @@ public class LoreProcess {
             keys = RandomEntry.PointsEntry.getKeys(false);
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券随机"); // 调试输出
         }
-        if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到的Keys："+keys); // 调试输出
+        if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到的Keys："+keys+" 物品的Lore:"+lore); // 调试输出
         int a = -1;
         for (String s : keys){
-            a = lore.indexOf(RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
+            if (VoP){
+                a = lore.indexOf(RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
+            }else{
+                a = lore.indexOf(RandomEntry.PointsEntry.getString(s+".IdentifyLore"));
+            }
+            if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("正在进行查询的是"+s+".IdentifyLore的内容\n使用的词条为："+RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
             if (a != -1){
                 VaultEntryKey = s;
                 if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到了Key:"+VaultEntryKey+"位置信息："+a);

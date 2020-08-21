@@ -17,8 +17,8 @@ public final class RandomEntry extends JavaPlugin {
     public static YamlConfiguration PointsEntry;
     public static YamlConfiguration Message;
     public static RandomEntry PluginMain;
-    private PlayerPoints playerPoints;
     public static boolean Debug;
+    private PlayerPoints playerPoints;
 
     public static RandomEntry getPluginMain() {
         return PluginMain;
@@ -40,43 +40,43 @@ public final class RandomEntry extends JavaPlugin {
         Message = YamlConfiguration.loadConfiguration(fileMessage);
         Debug = getConfig().getBoolean("Debug");
         long endTime = System.currentTimeMillis();
-        if (Debug) getLogger().info("程序执行加载耗时 "+(endTime-startTime)+" 毫秒");
+        if (Debug) getLogger().info("程序执行加载耗时 " + (endTime - startTime) + " 毫秒");
     }
 
     @Override
     public void onEnable() {
         long startTime = System.currentTimeMillis();
         PluginMain = this;
-        Bukkit.getPluginManager().registerEvents(new RandomEntryEvent(),this);
+        Bukkit.getPluginManager().registerEvents(new RandomEntryEvent(), this);
         Bukkit.getPluginCommand("RandomEntry").setExecutor(new RandomEntryCommand());
-        //加载gui
-        // 冰子：这部分进行了异步操作，以防止卡顿
-        Thread thread = new Thread(RandomEntryCommand::loadGUI);
-        thread.start();
+        //加载gui，去掉了异步操作。这部分异步反而会影响加载效率。大概会增加1-2毫秒，并且有上下文切换消耗。
+        RandomEntryCommand.loadGUI();
         // 初始化金币功能组件
         VaultEdit.setupEconomy();
         // 检测点券插件的
-        if (hookPlayerPoints()){
+        if (hookPlayerPoints()) {
             getLogger().info("成功载入点券系统");
-        }else{
+        } else {
             getLogger().info("点券系统载入失败");
         }
         // 统计使用量
-        Metrics metrics = new Metrics(this,8500);
+        Metrics metrics = new Metrics(this, 8500);
         long endTime = System.currentTimeMillis();
 
-        if (Debug) getLogger().info("程序执行启动耗时 "+(endTime-startTime)+" 毫秒");
+        if (Debug) getLogger().info("程序执行启动耗时 " + (endTime - startTime) + " 毫秒");
     }
 
     @Override
     public void onDisable() {
 
     }
+
     private boolean hookPlayerPoints() {
         final Plugin plugin = this.getServer().getPluginManager().getPlugin("PlayerPoints");
         playerPoints = PlayerPoints.class.cast(plugin);
         return playerPoints != null;
     }
+
     public PlayerPoints getPlayerPoints() {
         return playerPoints;
     }
