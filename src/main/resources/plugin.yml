@@ -1,7 +1,6 @@
 name: RandomEntry
 version: ${project.version}
 main: vip.bingzi.randomentry.RandomEntry
-api-version: "1.13"
 depend: [Vault, PlayerPoints]
 softdepend: [PlaceholderAPI, BZCore, Vault, PlayerPoints]
 authors: [BingZi]

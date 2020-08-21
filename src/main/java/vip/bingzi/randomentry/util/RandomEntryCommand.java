@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import vip.bingzi.randomentry.RandomEntry;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RandomEntryCommand implements CommandExecutor {
@@ -21,10 +22,17 @@ public class RandomEntryCommand implements CommandExecutor {
     //开服时加载gui不必每次都加载
     public static void loadGUI(){
         Inventory inventory = Bukkit.createInventory(null,45,RandomEntry.getPluginMain().getConfig().getString("ViewTitle"));
-        ItemStack itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString("Item.Mats")));
+        boolean Version = isVersion();
+        ItemStack itemStack = onItemStack(
+                RandomEntry.getPluginMain().getConfig().getString("Item.Mats"),
+                RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"),
+                RandomEntry.getPluginMain().getConfig().getString("Item.Name"),
+                Version
+        );
         ItemMeta meta = itemStack.getItemMeta();
         meta.setLore(RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"));
         meta.setDisplayName(RandomEntry.getPluginMain().getConfig().getString("Item.Name"));
+
         itemStack.setItemMeta(meta);
         for (int i = 0; i < 45; i++){
             if (i<=9||i==17||i==18||i==26||i==27||i==35||i>=36){
@@ -34,17 +42,39 @@ public class RandomEntryCommand implements CommandExecutor {
         ItemStack VaultButton = onItemStack(
                 RandomEntry.getPluginMain().getConfig().getString("VaultButton.Mats"),
                 RandomEntry.getPluginMain().getConfig().getStringList("VaultButton.Lore"),
-                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name")
+                RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name"),
+                Version
         );
         ItemStack PointsButton = onItemStack(
                 RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
                 RandomEntry.getPluginMain().getConfig().getStringList("PointsButton.Lore"),
-                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name")
+                RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name"),
+                Version
         );
         inventory.setItem(20,VaultButton);
         inventory.setItem(24,PointsButton);
         ViewGUi= inventory;
     }
+
+    private static boolean isVersion() {
+        ArrayList<String> listVersion = new ArrayList<String>(){{
+            add("1.12");
+            add("1.11");
+            add("1.10");
+            add("1.9");
+            add("1.8");
+            add("1.7");
+        }};
+        // true 表示旧版，false表示新版
+        boolean Version = false;
+        for (String s: listVersion){
+            if (RandomEntry.getPluginMain().getServer().getBukkitVersion().contains(s)){
+                Version = true;
+            }
+        }
+        return Version;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         long startTime = System.currentTimeMillis();
@@ -92,8 +122,13 @@ public class RandomEntryCommand implements CommandExecutor {
     public static void ViewGUi(Player p){
         p.openInventory(ViewGUi);
     }
-    private static ItemStack onItemStack(String material, List<String> Lore, String DisplayName){
-        ItemStack itemStack = new ItemStack(Material.valueOf(material));
+    private static ItemStack onItemStack(String material, List<String> Lore, String DisplayName,boolean Version){
+        ItemStack itemStack;
+        if (Version){
+            itemStack = new ItemStack(RandomEntry.getPluginMain().getConfig().getInt(material));
+        }else {
+            itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString(material)));
+        }
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setLore(Lore);
         itemMeta.setDisplayName(DisplayName);
