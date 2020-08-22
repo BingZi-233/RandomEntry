@@ -51,7 +51,7 @@ public class RandomEntryEvent implements Listener {
                     return;
                 }
                 // 进行了金币扣除操作
-                if (PointsEdit.onPointsEdit(player, RandomEntry.getPluginMain().getConfig().getInt("VaultButton.Consume"))) {
+                if (PointsEdit.onPointsEdit(player, RandomEntry.getPluginMain().getConfig().getInt("PointsButton.Consume"))) {
                     if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券扣除成功，正在进行后续操作");
                     LoreProcess.onStringProcess(player, false);
                 } else {
