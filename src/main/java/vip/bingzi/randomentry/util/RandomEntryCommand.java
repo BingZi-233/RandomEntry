@@ -16,6 +16,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static vip.bingzi.randomentry.RandomEntry.Debug;
+import static vip.bingzi.randomentry.RandomEntry.PluginMain;
+
 public class RandomEntryCommand implements CommandExecutor {
     private static Economy econ = null;
     private static Inventory ViewGUi;
@@ -23,10 +26,11 @@ public class RandomEntryCommand implements CommandExecutor {
     public static void loadGUI(){
         Inventory inventory = Bukkit.createInventory(null,45,RandomEntry.getPluginMain().getConfig().getString("ViewTitle"));
         boolean Version = isVersion();
+        if (Debug) PluginMain.getLogger().info("当前正在构建GUI第一个所需物品");
         ItemStack itemStack = onItemStack(
-                RandomEntry.getPluginMain().getConfig().getString("Item.Mats"),
-                RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"),
-                RandomEntry.getPluginMain().getConfig().getString("Item.Name"),
+                PluginMain.getConfig().getString("Item.Mats"),
+                PluginMain.getConfig().getStringList("Item.Lore"),
+                PluginMain.getConfig().getString("Item.Name"),
                 Version
         );
         ItemMeta meta = itemStack.getItemMeta();
@@ -39,12 +43,14 @@ public class RandomEntryCommand implements CommandExecutor {
                 inventory.setItem(i,itemStack);
             }
         }
+        if (Debug) PluginMain.getLogger().info("当前正在构建GUI第二个所需物品");
         ItemStack VaultButton = onItemStack(
                 RandomEntry.getPluginMain().getConfig().getString("VaultButton.Mats"),
                 RandomEntry.getPluginMain().getConfig().getStringList("VaultButton.Lore"),
                 RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name"),
                 Version
         );
+        if (Debug) PluginMain.getLogger().info("当前正在构建GUI第三个所需物品");
         ItemStack PointsButton = onItemStack(
                 RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
                 RandomEntry.getPluginMain().getConfig().getStringList("PointsButton.Lore"),
@@ -103,7 +109,7 @@ public class RandomEntryCommand implements CommandExecutor {
                 RandomEntry.Message = YamlConfiguration.loadConfiguration(new File(RandomEntry.getPluginMain().getDataFolder(),"Message.yml"));
                 RandomEntry.VaultEntry = YamlConfiguration.loadConfiguration(new File(RandomEntry.getPluginMain().getDataFolder(), "VaultEntry.yml"));
                 RandomEntry.getPluginMain().reloadConfig();
-                RandomEntry.Debug = RandomEntry.getPluginMain().getConfig().getBoolean("Debug");
+                Debug = RandomEntry.getPluginMain().getConfig().getBoolean("Debug");
                 break;
             }
             default:{
@@ -113,7 +119,7 @@ public class RandomEntryCommand implements CommandExecutor {
             }
         }
         long endTime = System.currentTimeMillis();
-        if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("程序执行命令耗时 "+(endTime-startTime)+" 毫秒");
+        if (Debug) RandomEntry.getPluginMain().getLogger().info("程序执行命令耗时 "+(endTime-startTime)+" 毫秒");
         return true;
     }
     public static Economy getEconomy() {
@@ -123,11 +129,14 @@ public class RandomEntryCommand implements CommandExecutor {
         p.openInventory(ViewGUi);
     }
     private static ItemStack onItemStack(String material, List<String> Lore, String DisplayName,boolean Version){
+        if (Debug) PluginMain.getLogger().info("第一个参数："+material);
+        if (Debug) PluginMain.getLogger().info("第二个参数："+Lore);
+        if (Debug) PluginMain.getLogger().info("第三个参数："+DisplayName);
         ItemStack itemStack;
         if (Version){
             itemStack = new ItemStack(RandomEntry.getPluginMain().getConfig().getInt(material));
         }else {
-            itemStack = new ItemStack(Material.valueOf(RandomEntry.getPluginMain().getConfig().getString(material)));
+            itemStack = new ItemStack(Material.valueOf(material));
         }
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setLore(Lore);
