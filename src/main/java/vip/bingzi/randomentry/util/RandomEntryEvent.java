@@ -58,7 +58,6 @@ public class RandomEntryEvent implements Listener {
                     if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券扣除失败，进行玩家提示");
                     player.sendRawMessage(RandomEntry.Message.getString("Failure"));
                 }
-                return;
             }
         }
     }

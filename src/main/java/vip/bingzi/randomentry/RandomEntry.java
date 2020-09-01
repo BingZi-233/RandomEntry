@@ -73,7 +73,7 @@ public final class RandomEntry extends JavaPlugin {
 
     private boolean hookPlayerPoints() {
         final Plugin plugin = this.getServer().getPluginManager().getPlugin("PlayerPoints");
-        playerPoints = PlayerPoints.class.cast(plugin);
+        playerPoints = (PlayerPoints) plugin;
         return playerPoints != null;
     }
 

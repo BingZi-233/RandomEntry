@@ -122,7 +122,7 @@ public class LoreProcess {
             if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("点券随机"); // 调试输出
         }
         if (RandomEntry.Debug) RandomEntry.getPluginMain().getLogger().info("获取到的Keys："+keys+" 物品的Lore:"+lore); // 调试输出
-        int a = -1;
+        int a;
         for (String s : keys){
             if (VoP){
                 a = lore.indexOf(RandomEntry.VaultEntry.getString(s+".IdentifyLore"));
