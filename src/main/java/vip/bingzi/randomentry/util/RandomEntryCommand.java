@@ -109,6 +109,7 @@ public class RandomEntryCommand implements CommandExecutor {
                 RandomEntry.Message = YamlConfiguration.loadConfiguration(new File(RandomEntry.getPluginMain().getDataFolder(),"Message.yml"));
                 RandomEntry.VaultEntry = YamlConfiguration.loadConfiguration(new File(RandomEntry.getPluginMain().getDataFolder(), "VaultEntry.yml"));
                 RandomEntry.getPluginMain().reloadConfig();
+                RandomEntryCommand.loadGUI();
                 Debug = RandomEntry.getPluginMain().getConfig().getBoolean("Debug");
                 break;
             }
