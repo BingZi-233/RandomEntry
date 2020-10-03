@@ -33,6 +33,7 @@ public class RandomEntryCommand implements CommandExecutor {
                 PluginMain.getConfig().getString("Item.Name"),
                 Version
         );
+        if (Debug) PluginMain.getLogger().info("GUI第一个所需物品构建完成");
         ItemMeta meta = itemStack.getItemMeta();
         meta.setLore(RandomEntry.getPluginMain().getConfig().getStringList("Item.Lore"));
         meta.setDisplayName(RandomEntry.getPluginMain().getConfig().getString("Item.Name"));
@@ -50,6 +51,7 @@ public class RandomEntryCommand implements CommandExecutor {
                 RandomEntry.getPluginMain().getConfig().getString("VaultButton.Name"),
                 Version
         );
+        if (Debug) PluginMain.getLogger().info("GUI第二个所需物品构建完成");
         if (Debug) PluginMain.getLogger().info("当前正在构建GUI第三个所需物品");
         ItemStack PointsButton = onItemStack(
                 RandomEntry.getPluginMain().getConfig().getString("PointsButton.Mats"),
@@ -57,6 +59,7 @@ public class RandomEntryCommand implements CommandExecutor {
                 RandomEntry.getPluginMain().getConfig().getString("PointsButton.Name"),
                 Version
         );
+        if (Debug) PluginMain.getLogger().info("GUI第三个所需物品构建完成");
         inventory.setItem(20,VaultButton);
         inventory.setItem(24,PointsButton);
         ViewGUi= inventory;
@@ -64,7 +67,6 @@ public class RandomEntryCommand implements CommandExecutor {
 
     private static boolean isVersion() {
         ArrayList<String> listVersion = new ArrayList<String>(){{
-            add("1.12");
             add("1.11");
             add("1.10");
             add("1.9");
@@ -135,8 +137,10 @@ public class RandomEntryCommand implements CommandExecutor {
         if (Debug) PluginMain.getLogger().info("第三个参数："+DisplayName);
         ItemStack itemStack;
         if (Version){
+            if (Debug) PluginMain.getLogger().info("正在使用Int类型构建");
             itemStack = new ItemStack(RandomEntry.getPluginMain().getConfig().getInt(material));
         }else {
+            if (Debug) PluginMain.getLogger().info("正在使用material类型构建");
             itemStack = new ItemStack(Material.valueOf(material));
         }
         ItemMeta itemMeta = itemStack.getItemMeta();
